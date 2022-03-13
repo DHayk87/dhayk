@@ -311,9 +311,9 @@ function left() {
   }
   setTimeout(() => {
     logosVisible[0].remove()
-    logosVisible[logosVisible.length - 1].remove()
+    //logosVisible[logosVisible.length - 1].remove()
     draw()
-    document.querySelector(".logos-slyder").onclick = left
+    document.querySelector(".logos-slyder").onload = left
   }, 2000)
 }
-setInterval(left, 2000)
+setInterval(left, 2500)
