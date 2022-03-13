@@ -1,3 +1,10 @@
+/* On load */
+
+setTimeout(() => {
+  const preload = document.querySelector("#page")
+  preload.classList.add('loaded_hiding')
+}, 500)
+
 /* Auto type text*/
 
 var TxtRotate = function (el, toRotate, period) {
@@ -70,12 +77,21 @@ function showDetails() {
 }
 
 
+let btn = document.querySelectorAll(".read-more")
+let less = document.querySelectorAll(".exp-less")
+let expBody = document.querySelectorAll(".exp")
 
-// let showMore = document.querySelectorAll(".exp-less")
+expBody = addEventListener('click', e => {
+  const current = e.target;
+  const isBtn = current.className.includes('read-more');
+  if (!isBtn)
+    return;
+  const currentText = e.target.parentNode.querySelector('.exp-less');
+  currentText.classList.toggle('show-me');
+  current.textContent = current.textContent.includes('Read More') ? 'Read Less' : 'Read More';
+});
 
-function show() {
-  document.querySelectorAll(".exp-less").classList.toggle('show-me')
-}
+
 
 
 // let showMore = document.getElementsByClassName("exp-less")
@@ -99,97 +115,74 @@ function show() {
 
 let progressBar = document.querySelector(".perc-content")
 let valueContainer = document.querySelector(".progress-bar1")
-
 let progressValue = 0
 let progressEndValue = 90
-let speed = 10
+let speed = 100
 
-// let progress = setInterval(() => {
-//   progressValue++
-//   valueContainer.textContent = `${progressValue}%`
-//   progressBar.style.background = `conic-gradient(
-//     #fff ${progressValue * 3.6}deg,
-//     #E2AE4C ${progressValue * 3.6}deg
-//   )`
-//   if (progressValue == progressEndValue) {
-//     clearInterval(progress)
-//   }
-// }, speed)
-/* ************************************** */
 
 let progressBar2 = document.querySelector(".perc-content2")
 let valueContainer2 = document.querySelector(".progress-bar2")
-
 let progressValue2 = 0
 let progressEndValue2 = 100
-let speed2 = 10
-
-let progress2 = setInterval(() => {
-  progressValue2++
-  valueContainer2.textContent = `${progressValue2}%`
-  progressBar2.style.background = `conic-gradient(
-    #fff ${progressValue2 * 3.6}deg,
-    #E2AE4C ${progressValue2 * 3.6}deg
-  )`
-  if (progressValue2 == progressEndValue2) {
-    clearInterval(progress2)
-  }
-}, speed2)
-
-/* ******************************************************** */
 
 
 let progressBar3 = document.querySelector(".perc-content3")
 let valueContainer3 = document.querySelector(".progress-bar3")
-
 let progressValue3 = 0
 let progressEndValue3 = 95
-let speed3 = 10
-
-let progress3 = setInterval(() => {
-  progressValue3++
-  valueContainer3.textContent = `${progressValue3}%`
-  progressBar3.style.background = `conic-gradient(
-    #fff ${progressValue3 * 3.6}deg,
-    #E2AE4C ${progressValue3 * 3.6}deg
-  )`
-  if (progressValue3 == progressEndValue3) {
-    clearInterval(progress3)
-  }
-}, speed3)
-
-
-/* *********************************************************** */
 
 let progressBar4 = document.querySelector(".perc-content4")
 let valueContainer4 = document.querySelector(".progress-bar4")
-
 let progressValue4 = 0
 let progressEndValue4 = 80
-let speed4 = 50
+
 
 window.onscroll = () => {
   let scrollTop = window.scrollY
   if (scrollTop >= 2600) {
+
     let progress = setInterval(() => {
       if (progressValue <= progressEndValue) {
         valueContainer.textContent = `${progressValue}%`
         progressBar.style.background = `conic-gradient(
-          #fff ${progressValue * 3.6}deg,
-          #E2AE4C ${progressValue * 3.6}deg
-          )`
+        #fff ${progressValue * 3.6}deg,
+        #E2AE4C ${progressValue * 3.6}deg
+        )`
         progressValue++
       }
       if (progressValue == progressEndValue) {
         clearInterval(progress)
       }
     }, speed)
-  }
-}
 
-window.onscroll = () => {
-  let scrollTop = window.scrollY
-  if (scrollTop >= 2600) {
+    let progress2 = setInterval(() => {
+      if (progressValue2 <= progressEndValue2) {
+        valueContainer2.textContent = `${progressValue2}%`
+        progressBar2.style.background = `conic-gradient(
+        #fff ${progressValue2 * 3.6}deg,
+        #E2AE4C ${progressValue2 * 3.6}deg
+        )`
+        progressValue2++
+      }
+      if (progressValue2 == progressEndValue2) {
+        clearInterval(progress2)
+      }
+    }, speed)
+
+    let progress3 = setInterval(() => {
+      if (progressValue3 <= progressEndValue3) {
+        valueContainer3.textContent = `${progressValue3}%`
+        progressBar3.style.background = `conic-gradient(
+          #fff ${progressValue3 * 3.6}deg,
+          #E2AE4C ${progressValue3 * 3.6}deg
+          )`
+        progressValue3++
+      }
+      if (progressValue3 == progressEndValue3) {
+        clearInterval(progress3)
+      }
+    }, speed)
+
     let progress4 = setInterval(() => {
       if (progressValue4 <= progressEndValue4) {
         valueContainer4.textContent = `${progressValue4}%`
@@ -202,61 +195,125 @@ window.onscroll = () => {
       if (progressValue4 == progressEndValue4) {
         clearInterval(progress4)
       }
-    }, speed4)
+    }, speed)
   }
 }
 
-/* ********************************************* */
+/* Album */
 
-//selecting all required elements
-const filterItem = document.querySelector(".items");
-const filterImg = document.querySelectorAll(".gallery .image");
+const filterItem = document.querySelector(".items")
+const filterImg = document.querySelectorAll(".gallery .image")
 
-window.onload = ()=>{  //after window loaded
-  filterItem.onclick = (selectedItem)=>{ //if user click on filterItem div
-    if(selectedItem.target.classList.contains("item")){ //if user selected item has .item class
-      filterItem.querySelector(".active").classList.remove("active"); //remove the active class which is in first item
-      selectedItem.target.classList.add("active"); //add that active class on user selected item
-      let filterName = selectedItem.target.getAttribute("data-name"); //getting data-name value of user selected item and store in a filtername variable
+window.onload = () => {
+  filterItem.onclick = (selectedItem) => {
+    if (selectedItem.target.classList.contains("item")) {
+      filterItem.querySelector(".active").classList.remove("active")
+      selectedItem.target.classList.add("active")
+      let filterName = selectedItem.target.getAttribute("data-name")
       filterImg.forEach((image) => {
-        let filterImges = image.getAttribute("data-name"); //getting image data-name value
-        //if user selected item data-name value is equal to images data-name value
-        //or user selected item data-name value is equal to "all"
-        if((filterImges == filterName) || (filterName == "all")){
-          image.classList.remove("hide"); //first remove the hide class from the image
-          image.classList.add("show"); //add show class in image
-        }else{
-          image.classList.add("hide"); //add hide class in image
-          image.classList.remove("show"); //remove show class from the image
+        let filterImges = image.getAttribute("data-name")
+        if ((filterImges == filterName) || (filterName == "all")) {
+          image.classList.remove("hide")
+          image.classList.add("show")
+        } else {
+          image.classList.add("hide")
+          image.classList.remove("show")
         }
-      });
+      })
     }
   }
   for (let i = 0; i < filterImg.length; i++) {
-    filterImg[i].setAttribute("onclick", "preview(this)"); //adding onclick attribute in all available images
+    filterImg[i].setAttribute("onclick", "preview(this)")
   }
 }
 
-//fullscreen image preview function
-//selecting all required elements
 const previewBox = document.querySelector(".preview-box"),
-categoryName = previewBox.querySelector(".title p"),
-previewImg = previewBox.querySelector("img"),
-closeIcon = previewBox.querySelector(".icon"),
-shadow = document.querySelector(".shadow");
+  categoryName = previewBox.querySelector(".title p"),
+  previewImg = previewBox.querySelector("img"),
+  closeIcon = previewBox.querySelector(".icon"),
+  shadow = document.querySelector(".shadow");
 
-function preview(element){
-  //once user click on any image then remove the scroll bar of the body, so user cant scroll up or down
+function preview(element) {
   document.querySelector("body").style.overflow = "hidden";
-  let selectedPrevImg = element.querySelector(".img").src; //getting user clicked image source link and stored in a variable
-  let selectedImgCategory = element.getAttribute("data-name"); //getting user clicked image data-name value
-  previewImg.src = selectedPrevImg; //passing the user clicked image source in preview image source
-  categoryName.textContent = selectedImgCategory; //passing user clicked data-name value in category name
-  previewBox.classList.add("show"); //show the preview image box
-  shadow.classList.add("show"); //show the light grey background
-  closeIcon.onclick = ()=>{ //if user click on close icon of preview box
-    previewBox.classList.remove("show"); //hide the preview box
-    shadow.classList.remove("show"); //hide the light grey background
-    document.querySelector("body").style.overflow = "auto"; //show the scroll bar on body
+  let selectedPrevImg = element.querySelector("img").src
+  let selectedImgCategory = element.getAttribute("data-name")
+  previewImg.src = selectedPrevImg
+  categoryName.textContent = selectedImgCategory
+  previewBox.classList.add("show")
+  shadow.classList.add("show")
+  closeIcon.onclick = () => {
+    previewBox.classList.remove("show")
+    shadow.classList.remove("show")
   }
 }
+
+/* carousel video */
+
+// let slyde = document.querySelector(".first-slyde .second-slyde")
+
+// let slyders =[]
+
+// for( let i = 0; i > slyde.length; i++){
+//   slyders[i] = slyde[i].querySelector('img')
+//   slyde[i].remove()
+// }
+
+// let step = 0
+
+// let offset = 0
+
+// function drow(){
+//   let slyde = document.createElement('div')
+
+//   slyde.classList.add(slyde)
+// }
+
+/* * Logos carousel* */
+
+let logos = document.querySelectorAll(".logo-single")
+let logosSlyder = []
+
+for (let i = 0; i < logos.length; i++) {
+  logosSlyder[i] = logos[i].src
+  logos[i].remove()
+}
+
+let step = 0
+
+let offset = 0
+
+function draw() {
+  let img = document.createElement("img")
+  img.classList.add("logo-single")
+  img.src = logosSlyder[step]
+  img.style.left = offset * 120 + "px"
+  document.querySelector(".logos-slyder").appendChild(img)
+  if (step + 1 == logosSlyder.length) {
+    step = 0
+  } else {
+    step++
+  }
+  offset = -1
+}
+draw()
+draw()
+draw()
+draw()
+draw()
+draw()
+
+function left() {
+  let logosVisible = document.querySelectorAll(".logo-single")
+  let offset2 = 0
+  for (let i = 0; i < logosVisible.length; i++) {
+    logosVisible[i].style.left = offset2 * 190 + "px"
+    offset2++
+  }
+  setTimeout(() => {
+    logosVisible[0].remove()
+    logosVisible[logosVisible.length - 1].remove()
+    draw()
+    document.querySelector(".logos-slyder").onclick = left
+  }, 2000)
+}
+setInterval(left, 2000)
