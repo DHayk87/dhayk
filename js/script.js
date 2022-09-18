@@ -3,7 +3,7 @@
 setTimeout(() => {
   const preload = document.querySelector("#page")
   preload.classList.add('loaded_hiding')
-}, 500)
+}, 3000)
 
 /* Auto type text*/
 
@@ -91,23 +91,6 @@ expBody = addEventListener('click', e => {
   current.textContent = current.textContent.includes('Read More') ? 'Read Less' : 'Read More';
 });
 
-
-
-
-// let showMore = document.getElementsByClassName("exp-less")
-// let btn = document.getElementsByClassName("btn")
-
-// function show (){
-//   var className = document.getElementsByClassName("exp-less")
-//   if( className.indexOf('expanded') == -1 ){
-//       className += ' expanded';
-//   }
-//   else {
-//       className = className.replace(' expanded', '');
-//   }
-//   showMore.className = className;
-//   return false;
-// };
 
 
 /* Progress bars */
@@ -204,27 +187,26 @@ window.onscroll = () => {
 const filterItem = document.querySelector(".items")
 const filterImg = document.querySelectorAll(".gallery .image")
 
-window.onload = () => {
-  filterItem.onclick = (selectedItem) => {
-    if (selectedItem.target.classList.contains("item")) {
-      filterItem.querySelector(".active").classList.remove("active")
-      selectedItem.target.classList.add("active")
-      let filterName = selectedItem.target.getAttribute("data-name")
-      filterImg.forEach((image) => {
-        let filterImges = image.getAttribute("data-name")
-        if ((filterImges == filterName) || (filterName == "all")) {
-          image.classList.remove("hide")
-          image.classList.add("show")
-        } else {
-          image.classList.add("hide")
-          image.classList.remove("show")
-        }
-      })
-    }
+
+filterItem.onclick = (selectedItem) => {
+  if (selectedItem.target.classList.contains("item")) {
+    filterItem.querySelector(".active").classList.remove("active")
+    selectedItem.target.classList.add("active")
+    let filterName = selectedItem.target.getAttribute("data-name")
+    filterImg.forEach((image) => {
+      let filterImges = image.getAttribute("data-name")
+      if ((filterImges == filterName) || (filterName == "all")) {
+        image.classList.remove("hide")
+        image.classList.add("show")
+      } else {
+        image.classList.add("hide")
+        image.classList.remove("show")
+      }
+    })
   }
-  for (let i = 0; i < filterImg.length; i++) {
-    filterImg[i].setAttribute("onclick", "preview(this)")
-  }
+}
+for (let i = 0; i < filterImg.length; i++) {
+  filterImg[i].setAttribute("onclick", "preview(this)")
 }
 
 const previewBox = document.querySelector(".preview-box"),
@@ -293,7 +275,7 @@ function draw() {
   } else {
     step++
   }
-  offset = -1
+  offset = 1
 }
 draw()
 draw()
@@ -311,9 +293,11 @@ function left() {
   }
   setTimeout(() => {
     logosVisible[0].remove()
-    //logosVisible[logosVisible.length - 1].remove()
+    // logosVisible[logosVisible.length - 1].remove()
     draw()
     document.querySelector(".logos-slyder").onload = left
   }, 2000)
 }
 setInterval(left, 2500)
+
+/* bg zoom */
